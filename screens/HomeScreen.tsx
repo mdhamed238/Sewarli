@@ -1,4 +1,4 @@
-import {Image, ScrollView, StyleSheet, View} from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import StyledText from '../components/StyledText';
 import colors from '../constants/colors';
@@ -227,7 +227,7 @@ const GalleriePhoto = () => {
 const HomeScreen = () => {
   return (
     <ScreenWrapper>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.fixedTopRightContainer}>
           <FAIcon name="bell" size={24} color={colors.white} />
           <ProfileAvatar />
@@ -349,7 +349,7 @@ const styles = StyleSheet.create({
   },
   banner: {
     height: 115,
-    width: 328,
+    width: '100%',
     backgroundColor: colors.darkGrey,
     marginTop: 12,
     borderRadius: 20,

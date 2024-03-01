@@ -40,7 +40,7 @@ const AppNavigation = () => {
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={'light-content'} backgroundColor={colors.black} />
+      <StatusBar />
       <AppNavigation />
     </SafeAreaView>
   );
