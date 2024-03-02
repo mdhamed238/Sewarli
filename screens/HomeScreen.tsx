@@ -1,19 +1,35 @@
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {useMemo} from 'react';
 import StyledText from '../components/StyledText';
 import colors from '../constants/colors';
 import ScreenWrapper from '../components/ScreenWrapper';
 import FAIcon from 'react-native-vector-icons/FontAwesome6';
 import ProfileAvatar from '../components/ProfileAvatar';
 import SectionHeader from '../components/SectionHeader';
-import FreelancerCard from '../components/FreelancerCard';
+import ExpertCard from '../components/ExpertCard';
 import Avatar from '../components/Avatar';
 import StickyButton from '../components/StickyButton';
+import {useTranslation} from 'react-i18next';
+import CountryIcon from '../components/CountryIcon';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {HomeStackList} from '../stacks/HomeStack';
+import i18next from 'i18next';
+import {Expert, Lang} from '../types';
+import i18n from '../lib/locales/i18n';
+import {experts} from '../lib/dummydata';
 
-const NearExperts = () => {
+const NearExperts = ({data}: {data: Expert[]}) => {
   return (
     <>
-      <SectionHeader title="Experts près de vous" />
+      <SectionHeader title={i18n.t('experts_nearyou')} />
       <ScrollView
         horizontal
         contentContainerStyle={{
@@ -21,51 +37,25 @@ const NearExperts = () => {
           marginTop: 16,
         }}
         showsHorizontalScrollIndicator={false}>
-        <FreelancerCard
-          image={
-            <Image
-              source={require('../assets/images/developer.jpg')}
-              style={styles.image}
-            />
-          }
-          title="Mohamed"
-          subtitle="Software Developer"
-          rating={4.1}
-          hasAvatar
-        />
-        <FreelancerCard
-          image={
-            <Image
-              source={require('../assets/images/interview.png')}
-              style={styles.image}
-            />
-          }
-          title="Sidi"
-          subtitle="Photographe"
-          rating={4.2}
-          hasAvatar
-        />
-        <FreelancerCard
-          image={
-            <Image
-              source={require('../assets/images/designer.jpg')}
-              style={styles.image}
-            />
-          }
-          title="Brahim"
-          subtitle="Designer graphique"
-          rating={4.0}
-          hasAvatar
-        />
+        {data.map((expert, index) => (
+          <ExpertCard
+            key={index}
+            image={<Image source={expert.image} style={styles.image} />}
+            title={i18next.language === 'ar' ? expert.nameAr : expert.nameFr}
+            subtitle={i18next.t(expert.profession)}
+            rating={expert.rating}
+            hasAvatar
+          />
+        ))}
       </ScrollView>
     </>
   );
 };
 
-const MostRecommendedExperts = () => {
+const MostRecommendedExperts = ({data}: {data: Expert[]}) => {
   return (
     <>
-      <SectionHeader title="Les plus recommandés" />
+      <SectionHeader title={i18n.t('most_recommended')} />
       <ScrollView
         horizontal
         contentContainerStyle={{
@@ -73,42 +63,16 @@ const MostRecommendedExperts = () => {
           marginTop: 16,
         }}
         showsHorizontalScrollIndicator={false}>
-        <FreelancerCard
-          image={
-            <Image
-              source={require('../assets/images/photographer2.jpg')}
-              style={styles.image}
-            />
-          }
-          title="Chevi3"
-          subtitle="Photographe"
-          rating={4.8}
-          hasAvatar
-        />
-        <FreelancerCard
-          image={
-            <Image
-              source={require('../assets/images/photographer.jpg')}
-              style={styles.image}
-            />
-          }
-          rating={4.8}
-          title="Omar"
-          subtitle="Photographe"
-          hasAvatar
-        />
-        <FreelancerCard
-          image={
-            <Image
-              source={require('../assets/images/videographer.jpg')}
-              style={styles.image}
-            />
-          }
-          rating={4.7}
-          title="Amir"
-          subtitle="Videographer"
-          hasAvatar
-        />
+        {data.map((expert, index) => (
+          <ExpertCard
+            key={index}
+            image={<Image source={expert.image} style={styles.image} />}
+            title={i18next.language === 'ar' ? expert.nameAr : expert.nameFr}
+            subtitle={i18next.t(expert.profession)}
+            rating={expert.rating}
+            hasAvatar
+          />
+        ))}
       </ScrollView>
     </>
   );
@@ -117,7 +81,7 @@ const MostRecommendedExperts = () => {
 const OurStudios = () => {
   return (
     <>
-      <SectionHeader title="Nos studios" />
+      <SectionHeader title={i18n.t('our_studios')} />
       <ScrollView
         horizontal
         contentContainerStyle={{
@@ -125,7 +89,7 @@ const OurStudios = () => {
           marginTop: 16,
         }}
         showsHorizontalScrollIndicator={false}>
-        <FreelancerCard
+        <ExpertCard
           image={
             <Image
               source={require('../assets/images/sound-lab.jpg')}
@@ -138,7 +102,7 @@ const OurStudios = () => {
           hasDivider
           hasMapPin
         />
-        <FreelancerCard
+        <ExpertCard
           image={
             <Image
               source={require('../assets/images/tune-town.jpg')}
@@ -151,7 +115,7 @@ const OurStudios = () => {
           hasDivider
           hasMapPin
         />
-        <FreelancerCard
+        <ExpertCard
           image={
             <Image
               source={require('../assets/images/serenity-studios.jpg')}
@@ -168,11 +132,12 @@ const OurStudios = () => {
     </>
   );
 };
+
 const TopExperts = () => {
   return (
     <View style={{marginTop: 40}}>
       <StyledText
-        text="Top Experts de ce mois"
+        text={i18n.t('top_experts_thismonth')}
         fontWeight="semibold"
         fontSize={16}
       />
@@ -184,10 +149,15 @@ const TopExperts = () => {
     </View>
   );
 };
+
 const GalleriePhoto = () => {
   return (
     <View style={{marginTop: 40}}>
-      <StyledText text="Gallerie photo" fontWeight="semibold" fontSize={16} />
+      <StyledText
+        text={i18n.t('galerie_photo')}
+        fontWeight="semibold"
+        fontSize={16}
+      />
       <ScrollView
         horizontal
         contentContainerStyle={{
@@ -224,7 +194,106 @@ const GalleriePhoto = () => {
   );
 };
 
+const Banner = () => {
+  return (
+    <View style={styles.banner}>
+      {/* Start: Icons */}
+      <Image
+        source={require('../assets/icons/microphone.png')}
+        style={[
+          styles.topEndMicro,
+          i18next.language === 'ar' ? {right: 12} : {right: 12},
+        ]}
+      />
+      <Image
+        source={require('../assets/icons/microphone.png')}
+        style={[
+          styles.centeredMicro,
+          i18next.language === 'ar'
+            ? {
+                left: 70,
+                transform: [{rotate: '-45deg'}],
+              }
+            : {
+                left: 78,
+              },
+        ]}
+      />
+      <Image
+        source={require('../assets/icons/video-camera.png')}
+        style={[
+          styles.videoCamera,
+          i18next.language === 'ar'
+            ? {left: 24, transform: [{rotateY: '180deg'}]}
+            : {left: 32},
+        ]}
+      />
+      <Image
+        source={require('../assets/icons/headphone.png')}
+        style={[
+          styles.headphone,
+          i18next.language === 'ar' ? {left: 20} : {left: 28},
+        ]}
+      />
+      {/* End: Icons */}
+
+      <View
+        style={[
+          {top: 16},
+          i18next.language === 'ar' ? {left: 132, gap: 2} : {left: 132},
+        ]}>
+        <StyledText
+          text={i18next.t('we_also_rent')}
+          fontWeight={'normal'}
+          style={{
+            letterSpacing: 0.5,
+            lineHeight: 24,
+          }}
+        />
+        <StyledText
+          text={i18next.t('des_studios')}
+          fontWeight={'bold'}
+          style={{
+            fontSize: 17.5,
+            letterSpacing: 0.5,
+            lineHeight: 24,
+          }}
+        />
+        <StyledText
+          text={i18next.t('for_recording')}
+          fontWeight={'bold'}
+          color={colors.primaryVarient}
+          style={{
+            fontSize: 17.5,
+            letterSpacing: 0.5,
+            lineHeight: 24,
+          }}
+        />
+      </View>
+      {/* <LinearGradient
+      colors={['#FFC83A', '#6100FF', '#1A1A1A']}
+      style={styles.linearGradient}
+      start={{x: 0, y: 0}}
+      end={{x: 0.5, y: -0.5}}
+      angle={80.88} // Adjusts the gradient angle
+    /> */}
+    </View>
+  );
+};
+
 const HomeScreen = () => {
+  const {t} = useTranslation();
+  const navigation = useNavigation<HomeScreenProp>();
+  const [expertsNearYou, mostRecommendedExperts] = useMemo(() => {
+    const rand = Math.floor(Math.random() * 10);
+    const expertsNY = experts.slice(rand, rand + 3);
+    const mostRecommended = experts
+      .sort((a, b) => b.rating - a.rating)
+      .slice(0, 3);
+
+    return [expertsNY, mostRecommended];
+  }, []);
+
   return (
     <ScreenWrapper>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -232,78 +301,34 @@ const HomeScreen = () => {
           <FAIcon name="bell" size={24} color={colors.white} />
           <ProfileAvatar />
         </View>
+        <TouchableOpacity
+          style={styles.fixedTopLeftContainer}
+          onPress={() => navigation.navigate('Language')}>
+          <CountryIcon country={i18next.language as Lang} />
+        </TouchableOpacity>
         <StyledText
           fontWeight="bold"
-          text="Salut Mohamed! 👋"
+          text={t('hello_user', {name: 'Mohamed'})}
           color={colors.white}
           fontSize={24}
+          style={{
+            marginTop: 10,
+          }}
         />
-        <NearExperts />
-        <MostRecommendedExperts />
-        <View style={styles.banner}>
-          <Image
-            source={require('../assets/icons/microphone.png')}
-            style={styles.topEndMicro}
-          />
-          <Image
-            source={require('../assets/icons/microphone.png')}
-            style={styles.centeredMicro}
-          />
-          <Image
-            source={require('../assets/icons/video-camera.png')}
-            style={styles.videoCamera}
-          />
-          <Image
-            source={require('../assets/icons/headphone.png')}
-            style={styles.headphone}
-          />
-
-          <View style={{top: 16, left: 132}}>
-            <StyledText
-              text="Nous louons aussi"
-              fontWeight={'medium'}
-              style={{
-                letterSpacing: 0.5,
-                lineHeight: 24,
-              }}
-            />
-            <StyledText
-              text="des studios"
-              fontWeight={'bold'}
-              style={{
-                fontSize: 17.5,
-                letterSpacing: 0.5,
-                lineHeight: 24,
-              }}
-            />
-            <StyledText
-              text="d'enregistrement"
-              fontWeight={'bold'}
-              color={colors.primaryVarient}
-              style={{
-                fontSize: 17.5,
-                letterSpacing: 0.5,
-                lineHeight: 24,
-              }}
-            />
-          </View>
-          {/* <LinearGradient
-            colors={['#FFC83A', '#6100FF', '#1A1A1A']}
-            style={styles.linearGradient}
-            start={{x: 0, y: 0}}
-            end={{x: 0.5, y: -0.5}}
-            angle={80.88} // Adjusts the gradient angle
-          /> */}
-        </View>
+        <NearExperts data={expertsNearYou} />
+        <MostRecommendedExperts data={mostRecommendedExperts} />
+        <Banner />
         <OurStudios />
         <TopExperts />
         <GalleriePhoto />
         <View style={{height: 80}} />
       </ScrollView>
-      <StickyButton text="Ajouter événement" onPress={() => {}} />
+      <StickyButton text={t('add_event')} onPress={() => {}} />
     </ScreenWrapper>
   );
 };
+
+type HomeScreenProp = NativeStackNavigationProp<HomeStackList, 'Home'>;
 
 export default HomeScreen;
 
@@ -322,28 +347,24 @@ const styles = StyleSheet.create({
   videoCamera: {
     position: 'absolute',
     top: 7,
-    left: 32,
     width: 56,
     height: 50,
   },
   headphone: {
     position: 'absolute',
     bottom: 22,
-    left: 28,
     width: 42,
     height: 42,
   },
   centeredMicro: {
     position: 'absolute',
     top: 18,
-    left: 78,
     width: 49,
     height: 49,
   },
   topEndMicro: {
     position: 'absolute',
     top: 12,
-    right: 12,
     width: 25,
     height: 25,
   },
@@ -365,6 +386,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 20,
     marginBottom: 8,
+  },
+  fixedTopLeftContainer: {
+    position: 'absolute',
+    top: 5,
   },
   image: {
     width: '100%',

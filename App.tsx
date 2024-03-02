@@ -1,11 +1,12 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
-
-import colors from './constants/colors';
+import {I18nManager, SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import MainStack from './stacks/MainStack';
 import AuthStack from './stacks/AuthStack';
+import i18n from './lib/locales/i18n';
+import i18next from 'i18next';
+import {storage} from './lib/storage';
 
 const Stack = createNativeStackNavigator();
 const AppNavigation = () => {
@@ -38,6 +39,15 @@ const AppNavigation = () => {
 };
 
 export default function App() {
+  const lang = storage.getString('language');
+  i18n.init(lang).finally(() => {
+    const {language} = i18next;
+    if (language === 'ar' && !I18nManager.isRTL) {
+      I18nManager.forceRTL(true);
+      I18nManager.allowRTL(true);
+    }
+  });
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar />

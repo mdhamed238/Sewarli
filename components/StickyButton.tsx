@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import colors from '../constants/colors';
 import StyledText from './StyledText';
+import i18next from 'i18next';
 
 const StickyButton = ({text, onPress}: {text: string; onPress: () => void}) => {
   return (
@@ -9,7 +10,7 @@ const StickyButton = ({text, onPress}: {text: string; onPress: () => void}) => {
       <StyledText
         text={text}
         color={colors.secondary}
-        fontWeight="semibold"
+        fontWeight="bold"
         fontSize={14}
       />
     </TouchableOpacity>

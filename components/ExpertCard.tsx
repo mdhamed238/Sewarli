@@ -11,7 +11,7 @@ const avatars = [
   require('../assets/avatars/avatar3.png'),
 ];
 
-const FreelancerCard = ({
+const ExpertCard = ({
   image,
   title,
   subtitle,
@@ -47,7 +47,7 @@ const FreelancerCard = ({
             {hasMapPin && (
               <FAIcon name="map-marker" color={colors.white} size={16} />
             )}
-            <StyledText text={subtitle} />
+            <StyledText text={subtitle} fontSize={14} />
           </View>
         </View>
       </View>
@@ -63,7 +63,7 @@ const FreelancerCard = ({
   );
 };
 
-export default FreelancerCard;
+export default ExpertCard;
 
 const styles = StyleSheet.create({
   divider: {

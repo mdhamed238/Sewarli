@@ -1,17 +1,26 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
 import EventScreen from '../screens/EventScreen';
 import ExploreScreen from '../screens/ExploreScreen';
 import AssistanceScreen from '../screens/AssistanceScreen';
 import colors from '../constants/colors';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import HomeStack from './HomeStack';
+import {useTranslation} from 'react-i18next';
 
-const Tab = createBottomTabNavigator();
+export type MainStackList = {
+  HomeStack: undefined;
+  Events: undefined;
+  Explore: undefined;
+  Assistance: undefined;
+};
+
+const Tab = createBottomTabNavigator<MainStackList>();
 
 const MainStack = () => {
+  const {t} = useTranslation();
   return (
     <Tab.Navigator
       screenOptions={{
@@ -36,9 +45,10 @@ const MainStack = () => {
         },
       }}>
       <Tab.Screen
-        name="Home"
-        component={HomeScreen}
+        name="HomeStack"
+        component={HomeStack}
         options={{
+          title: t('home'),
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({color, size, focused}) => (
             <View style={[styles.tabIcon, focused ? styles.activeTabIcon : {}]}>
@@ -51,6 +61,7 @@ const MainStack = () => {
         name="Events"
         component={EventScreen}
         options={{
+          title: t('events'),
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({color, size, focused}) => (
             <View style={[styles.tabIcon, focused ? styles.activeTabIcon : {}]}>
@@ -63,6 +74,7 @@ const MainStack = () => {
         name="Explore"
         component={ExploreScreen}
         options={{
+          title: t('explore'),
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({color, size, focused}) => (
             <View style={[styles.tabIcon, focused ? styles.activeTabIcon : {}]}>
@@ -75,6 +87,7 @@ const MainStack = () => {
         name="Assistance"
         component={AssistanceScreen}
         options={{
+          title: t('assistance'),
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({color, size, focused}) => (
             <View style={[styles.tabIcon, focused ? styles.activeTabIcon : {}]}>

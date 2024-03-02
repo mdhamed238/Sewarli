@@ -15,7 +15,7 @@ const LinkButton = ({text, icon, to}: Props) => {
 
   const handlePress = () => {
     if (to) {
-      navigation.navigate(to); // Navigate to the specified screen
+      navigation.navigate(to);
     }
   };
 

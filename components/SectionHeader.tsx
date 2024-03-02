@@ -4,6 +4,7 @@ import StyledText from './StyledText';
 import LinkButton from './LinkButton';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import colors from '../constants/colors';
+import i18next from 'i18next';
 
 const SectionHeader = ({title, linkTo}: {title: string; linkTo?: string}) => {
   return (
@@ -15,11 +16,11 @@ const SectionHeader = ({title, linkTo}: {title: string; linkTo?: string}) => {
         fontSize={16}
       />
       <LinkButton
-        text="Voir tout"
+        text={i18next.t('see_more')}
         to={linkTo ?? null}
         icon={
           <FontAwesome5Icon
-            name="chevron-right"
+            name={i18next.dir() === 'rtl' ? 'chevron-left' : 'chevron-right'}
             size={14}
             color={colors.primaryVarient}
           />

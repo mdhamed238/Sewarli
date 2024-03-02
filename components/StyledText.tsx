@@ -1,6 +1,8 @@
 import React from 'react';
 import {Text, StyleSheet, StyleProp, TextStyle} from 'react-native';
 import colors from '../constants/colors';
+import i18n from '../lib/locales/i18n';
+import i18next from 'i18next';
 
 type StyledTextProps = {
   text: string;
@@ -17,7 +19,7 @@ type StyledTextProps = {
   style?: StyleProp<TextStyle>;
 };
 
-const fontMap = {
+const frenchFontMap = {
   light: 'DMSans-Light',
   normal: 'DMSans-Regular',
   medium: 'DMSans-Medium',
@@ -25,6 +27,15 @@ const fontMap = {
   bold: 'DMSans-Bold',
   extrabold: 'DMSans-ExtraBold',
   black: 'DMSans-Black',
+};
+const arabicFontMap = {
+  light: 'Cairo-Light',
+  normal: 'Cairo-Regular',
+  medium: 'Cairo-Medium',
+  semibold: 'Cairo-SemiBold',
+  bold: 'Cairo-Bold',
+  extrabold: 'Cairo-ExtraBold',
+  black: 'Cairo-ExtraBold',
 };
 
 const StyledText: React.FC<StyledTextProps> = ({
@@ -38,7 +49,12 @@ const StyledText: React.FC<StyledTextProps> = ({
     text: {
       color,
       fontSize,
-      fontFamily: fontMap[fontWeight],
+      fontFamily:
+        i18n.language === 'ar'
+          ? arabicFontMap[fontWeight]
+          : frenchFontMap[fontWeight],
+
+      // textAlign: i18next.language === 'ar' ? 'right' : 'left',
     },
   });
 
