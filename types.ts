@@ -4,7 +4,7 @@ export type Expert = {
   username: string;
   nameFr: string;
   nameAr: string;
-  profession: string;
+  domain: 'photographer' | 'videographer' | 'video_editor' | 'graphic_designer';
   yearsOfExperience: number;
   rating: number;
   image: any;

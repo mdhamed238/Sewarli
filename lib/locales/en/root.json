@@ -14,13 +14,13 @@
   "choose_language": "Choose your language",
   "experts_nearyou": "Experts near you",
   "most_recommended": "Most recommended",
-  "our_studios": "Our studios",
   "top_experts_thismonth": "Top experts of this month",
   "galerie_photo": "Photo gallery",
   "photographer": "Photographer",
   "videographer": "Videographer",
   "designer": "Designer",
   "graphic_designer": "Graphic designer",
+  "video_editor": "Video editor",
   "ui_ux_designer": "UI/UX designer",
   "web_designer": "Web designer",
   "software_developer": "Software developer",
@@ -28,5 +28,9 @@
   "we_also_rent": "We also rent",
   "des_studios": "studios",
   "for_recording": "for recording",
-  "add_event": "Add event"
+  "add_event": "Add event",
+  "our_monteurs": "Our video editors",
+  "our_studios": "Our studios",
+  "our_experts": "Our experts",
+  "years_of_experience": "+{{years}} of experience"
 }

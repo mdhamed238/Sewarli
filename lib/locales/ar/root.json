@@ -15,13 +15,13 @@
   "choose_language": "اختر لغتك",
   "experts_nearyou": "خبراء بالقرب منك",
   "most_recommended": "الأكثر توصية",
-  "our_studios": "استوديوهاتنا",
   "top_experts_thismonth": "أفضل الخبراء هذا الشهر",
   "galerie_photo": "معرض الصور",
   "photographer": "مصور",
   "videographer": "مصور فيديو",
   "designer": "مصمم",
   "graphic_designer": "مصمم جرافيك",
+  "video_editor": "محرر فيديو",
   "ui_ux_designer": "مصمم واجهة المستخدم",
   "web_designer": "مصمم ويب",
   "software_developer": "مطور برمجيات",
@@ -29,5 +29,9 @@
   "we_also_rent": "نحن نأجر أيضا",
   "des_studios": "استوديوهات",
   "for_recording": "للتسجيل",
-  "add_event": "إضافة حدث"
+  "add_event": "إضافة حدث",
+  "our_monteurs": "محرري الفيديو لدينا",
+  "our_studios": "استوديوهاتنا",
+  "our_experts": "خبرائنا",
+  "years_of_experience": "+{{years}} من الخبرة"
 }

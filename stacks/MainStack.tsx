@@ -2,13 +2,17 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import EventScreen from '../screens/EventScreen';
-import ExploreScreen from '../screens/ExploreScreen';
+import ExploreScreen from '../screens/explore/ExploreScreen';
 import AssistanceScreen from '../screens/AssistanceScreen';
 import colors from '../constants/colors';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import HomeStack from './HomeStack';
 import {useTranslation} from 'react-i18next';
+import HomeIcon from '../assets/svg/home.svg';
+import ExploreIcon from '../assets/svg/explore.svg';
+import EventIcon from '../assets/svg/event.svg';
+import AssistanceIcon from '../assets/svg/assistance.svg';
 
 export type MainStackList = {
   HomeStack: undefined;
@@ -34,6 +38,7 @@ const MainStack = () => {
           paddingRight: 8,
           paddingLeft: 8,
           gap: 8,
+          borderTopWidth: 0,
         },
         tabBarItemStyle: {
           paddingTop: 12,
@@ -52,20 +57,7 @@ const MainStack = () => {
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({color, size, focused}) => (
             <View style={[styles.tabIcon, focused ? styles.activeTabIcon : {}]}>
-              <Entypo name="home" color={color} size={size} />
-            </View>
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Events"
-        component={EventScreen}
-        options={{
-          title: t('events'),
-          // eslint-disable-next-line react/no-unstable-nested-components
-          tabBarIcon: ({color, size, focused}) => (
-            <View style={[styles.tabIcon, focused ? styles.activeTabIcon : {}]}>
-              <FontAwesome5Icon name="compass" color={color} size={size} />
+              <HomeIcon width={24} height={24} />
             </View>
           ),
         }}
@@ -78,7 +70,20 @@ const MainStack = () => {
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({color, size, focused}) => (
             <View style={[styles.tabIcon, focused ? styles.activeTabIcon : {}]}>
-              <Entypo name="calendar" color={color} size={size} />
+              <ExploreIcon width={24} height={24} />
+            </View>
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Events"
+        component={EventScreen}
+        options={{
+          title: t('events'),
+          // eslint-disable-next-line react/no-unstable-nested-components
+          tabBarIcon: ({color, size, focused}) => (
+            <View style={[styles.tabIcon, focused ? styles.activeTabIcon : {}]}>
+              <EventIcon width={24} height={24} />
             </View>
           ),
         }}
@@ -91,11 +96,7 @@ const MainStack = () => {
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({color, size, focused}) => (
             <View style={[styles.tabIcon, focused ? styles.activeTabIcon : {}]}>
-              <FontAwesome5Icon
-                name="question-circle"
-                color={color}
-                size={size}
-              />
+              <AssistanceIcon width={24} height={24} />
             </View>
           ),
         }}

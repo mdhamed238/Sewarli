@@ -42,7 +42,7 @@ const NearExperts = ({data}: {data: Expert[]}) => {
             key={index}
             image={<Image source={expert.image} style={styles.image} />}
             title={i18next.language === 'ar' ? expert.nameAr : expert.nameFr}
-            subtitle={i18next.t(expert.profession)}
+            subtitle={i18next.t(expert.domain)}
             rating={expert.rating}
             hasAvatar
           />
@@ -68,7 +68,7 @@ const MostRecommendedExperts = ({data}: {data: Expert[]}) => {
             key={index}
             image={<Image source={expert.image} style={styles.image} />}
             title={i18next.language === 'ar' ? expert.nameAr : expert.nameFr}
-            subtitle={i18next.t(expert.profession)}
+            subtitle={i18next.t(expert.domain)}
             rating={expert.rating}
             hasAvatar
           />
@@ -285,7 +285,7 @@ const HomeScreen = () => {
   const {t} = useTranslation();
   const navigation = useNavigation<HomeScreenProp>();
   const [expertsNearYou, mostRecommendedExperts] = useMemo(() => {
-    const rand = Math.floor(Math.random() * 10);
+    const rand = Math.floor(Math.random() * 9);
     const expertsNY = experts.slice(rand, rand + 3);
     const mostRecommended = experts
       .sort((a, b) => b.rating - a.rating)
