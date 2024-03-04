@@ -1,15 +1,12 @@
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import React from 'react';
-import SectionHeader from '../../components/SectionHeader';
+import ScreenWrapper from '../../components/ScreenWrapper';
 
 const OurStudiosScreen = () => {
   return (
-    <View
-      style={{
-        paddingTop: 8,
-      }}>
-      <SectionHeader title={'our_studios'} />
-    </View>
+    <ScreenWrapper>
+      <ScrollView showsVerticalScrollIndicator={false}></ScrollView>
+    </ScreenWrapper>
   );
 };
 

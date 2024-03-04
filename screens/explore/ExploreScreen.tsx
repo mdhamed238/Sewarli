@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import ScreenWrapper from '../../components/ScreenWrapper';
@@ -9,8 +9,7 @@ import FontAwesome6Icon from 'react-native-vector-icons/FontAwesome6';
 import ProfileAvatar from '../../components/ProfileAvatar';
 import OurExpertsScreen from './OurExpertsScreen';
 import OurStudiosScreen from './OurStudiosScreen';
-import i18next, {t} from 'i18next';
-import {wp} from '../../lib/utils/functions';
+import i18next from 'i18next';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -32,6 +31,7 @@ const Tabs = () => {
           backgroundColor: colors.primary,
         },
         tabBarPressColor: colors.grey,
+        swipeEnabled: false,
       }}>
       <Tab.Screen
         name="OurExperts"
@@ -55,21 +55,19 @@ const ExploreScreen = () => {
   const {t} = useTranslation();
   return (
     <ScreenWrapper noHorizontalPadding>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.topContainer}>
-          <View style={styles.fixedTopRightContainer}>
-            <FontAwesome6Icon name="bell" size={24} color={colors.white} />
-            <ProfileAvatar />
-          </View>
-          <StyledText
-            fontWeight="bold"
-            text={t('explore') + '🪄'}
-            color={colors.white}
-            fontSize={24}
-          />
+      <View style={styles.topContainer}>
+        <View style={styles.fixedTopRightContainer}>
+          <FontAwesome6Icon name="bell" size={24} color={colors.white} />
+          <ProfileAvatar />
         </View>
-        <Tabs />
-      </ScrollView>
+        <StyledText
+          fontWeight="bold"
+          text={t('explore') + '🪄'}
+          color={colors.white}
+          fontSize={24}
+        />
+      </View>
+      <Tabs />
     </ScreenWrapper>
   );
 };
