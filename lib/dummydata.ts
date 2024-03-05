@@ -1,4 +1,43 @@
-import {Expert} from '../types';
+import {Expert, Studio} from '../types';
+
+export const studios: Studio[] = [
+  {
+    name: 'SoundLab Studios',
+    city: 'Akjoujt',
+    rating: 4.2,
+    image: require('../assets/images/studios/sound-lab.jpg'),
+  },
+  {
+    name: 'TuneTown',
+    city: 'Kiffa',
+    rating: 4.3,
+    image: require('../assets/images/studios/tune-town.jpg'),
+  },
+  {
+    name: 'Serenity Studios',
+    city: 'Nouakchott',
+    rating: 4.8,
+    image: require('../assets/images/studios/serenity-studios.jpg'),
+  },
+  {
+    name: 'Tuned Recording',
+    city: 'Néma',
+    rating: 4.2,
+    image: require('../assets/images/studios/tuned-recording.jpg'),
+  },
+  {
+    name: 'Rubby Recording',
+    city: 'Nouakchott',
+    rating: 4.5,
+    image: require('../assets/images/studios/rubby-recording.jpg'),
+  },
+  {
+    name: 'Waves Studios',
+    city: 'Nouakchott',
+    rating: 4.9,
+    image: require('../assets/images/studios/waves-studios.jpg'),
+  },
+];
 
 export const experts: Expert[] = [
   {

@@ -49,7 +49,7 @@ const ExpertCard = ({
           )}
           <View style={styles.description}>
             <StyledText text={title} />
-            {hasDivider && !hasAvatar && <View style={styles.divider} />}
+            {hasDivider && !hasAvatar && <View style={[styles.divider, {}]} />}
             <View style={{flexDirection: 'row', alignItems: 'center', gap: 6}}>
               {hasMapPin && !hasAvatar && (
                 <FAIcon name="map-marker" color={colors.white} size={16} />

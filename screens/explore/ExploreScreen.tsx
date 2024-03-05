@@ -24,11 +24,12 @@ const Tabs = () => {
         tabBarLabelStyle: {
           fontSize: 14,
           fontWeight: 'bold',
-          color: colors.white,
           textTransform: 'none',
         },
+        tabBarActiveTintColor: colors.primaryVarient,
+        tabBarInactiveTintColor: colors.white,
         tabBarIndicatorStyle: {
-          backgroundColor: colors.primary,
+          backgroundColor: colors.primaryVarient,
         },
         tabBarPressColor: colors.grey,
         swipeEnabled: false,

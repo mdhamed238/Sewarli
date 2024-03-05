@@ -22,9 +22,10 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {HomeStackList} from '../stacks/HomeStack';
 import i18next from 'i18next';
-import {Expert, Lang} from '../types';
+import {Expert, Lang, Studio} from '../types';
 import i18n from '../lib/locales/i18n';
-import {experts} from '../lib/dummydata';
+import {experts, studios} from '../lib/dummydata';
+import StudioCard from '../components/StudioCard';
 
 const NearExperts = ({data}: {data: Expert[]}) => {
   return (
@@ -41,7 +42,7 @@ const NearExperts = ({data}: {data: Expert[]}) => {
           <ExpertCard
             key={index}
             image={<Image source={expert.image} style={styles.image} />}
-            title={i18next.language === 'ar' ? expert.nameAr : expert.nameFr}
+            title={expert.username}
             subtitle={i18next.t(expert.domain)}
             rating={expert.rating}
             hasAvatar
@@ -67,7 +68,7 @@ const MostRecommendedExperts = ({data}: {data: Expert[]}) => {
           <ExpertCard
             key={index}
             image={<Image source={expert.image} style={styles.image} />}
-            title={i18next.language === 'ar' ? expert.nameAr : expert.nameFr}
+            title={expert.username}
             subtitle={i18next.t(expert.domain)}
             rating={expert.rating}
             hasAvatar
@@ -78,7 +79,7 @@ const MostRecommendedExperts = ({data}: {data: Expert[]}) => {
   );
 };
 
-const OurStudios = () => {
+const OurStudios = ({data}: {data: Studio[]}) => {
   return (
     <>
       <SectionHeader title={i18n.t('our_studios')} />
@@ -89,45 +90,15 @@ const OurStudios = () => {
           marginTop: 16,
         }}
         showsHorizontalScrollIndicator={false}>
-        <ExpertCard
-          image={
-            <Image
-              source={require('../assets/images/sound-lab.jpg')}
-              style={styles.image}
-            />
-          }
-          title="SoundLab Studios"
-          subtitle="Akjoujt"
-          rating={4.2}
-          hasDivider
-          hasMapPin
-        />
-        <ExpertCard
-          image={
-            <Image
-              source={require('../assets/images/tune-town.jpg')}
-              style={styles.image}
-            />
-          }
-          rating={4.3}
-          title="TuneTown"
-          subtitle="Kiffa"
-          hasDivider
-          hasMapPin
-        />
-        <ExpertCard
-          image={
-            <Image
-              source={require('../assets/images/serenity-studios.jpg')}
-              style={styles.image}
-            />
-          }
-          rating={4.8}
-          title="Serenity Studios"
-          subtitle="Nouakchott"
-          hasDivider
-          hasMapPin
-        />
+        {data.map((studio, index) => (
+          <StudioCard
+            key={index}
+            image={studio.image}
+            name={studio.name}
+            city={studio.city}
+            rating={studio.rating}
+          />
+        ))}
       </ScrollView>
     </>
   );
@@ -150,12 +121,12 @@ const TopExperts = () => {
   );
 };
 
-const GalleriePhoto = () => {
+const GalleriePhoto = ({photos}: {photos: any[]}) => {
   return (
     <View style={{marginTop: 40}}>
       <StyledText
         text={i18n.t('galerie_photo')}
-        fontWeight="semibold"
+        fontWeight="medium"
         fontSize={16}
       />
       <ScrollView
@@ -165,30 +136,9 @@ const GalleriePhoto = () => {
           marginTop: 16,
         }}
         showsHorizontalScrollIndicator={false}>
-        <Image
-          style={styles.galleriePhoto}
-          source={require('../assets/images/gallerie1.jpg')}
-        />
-        <Image
-          style={styles.galleriePhoto}
-          source={require('../assets/images/gallerie2.jpg')}
-        />
-        <Image
-          style={styles.galleriePhoto}
-          source={require('../assets/images/gallerie3.jpg')}
-        />
-        <Image
-          style={styles.galleriePhoto}
-          source={require('../assets/images/gallerie4.jpg')}
-        />
-        <Image
-          style={styles.galleriePhoto}
-          source={require('../assets/images/gallerie5.jpg')}
-        />
-        <Image
-          style={styles.galleriePhoto}
-          source={require('../assets/images/gallerie6.jpg')}
-        />
+        {photos.map((photo, index) => (
+          <Image key={index} style={styles.galleriePhoto} source={photo} />
+        ))}
       </ScrollView>
     </View>
   );
@@ -318,9 +268,18 @@ const HomeScreen = () => {
         <NearExperts data={expertsNearYou} />
         <MostRecommendedExperts data={mostRecommendedExperts} />
         <Banner />
-        <OurStudios />
+        <OurStudios data={studios} />
         <TopExperts />
-        <GalleriePhoto />
+        <GalleriePhoto
+          photos={[
+            require('../assets/images/gallerie1.jpg'),
+            require('../assets/images/gallerie2.jpg'),
+            require('../assets/images/gallerie3.jpg'),
+            require('../assets/images/gallerie4.jpg'),
+            require('../assets/images/gallerie5.jpg'),
+            require('../assets/images/gallerie6.jpg'),
+          ]}
+        />
         <View style={{height: 80}} />
       </ScrollView>
       <StickyButton text={t('add_event')} onPress={() => {}} />

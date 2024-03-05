@@ -22,3 +22,10 @@ export type Expert = {
   rating: number;
   image: any;
 };
+
+export type Studio = {
+  name: string;
+  city: string;
+  rating: number;
+  image: any;
+};

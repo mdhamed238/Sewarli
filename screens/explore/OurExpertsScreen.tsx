@@ -24,11 +24,11 @@ const Experts = ({data, title}: {data: Expert[]; title: string}) => {
           marginTop: 16,
         }}
         showsHorizontalScrollIndicator={false}>
-        {data.map((expert, index) => (
+        {data.map(expert => (
           <ExpertCard
             key={expert.username}
             image={<Image source={expert.image} style={styles.image} />}
-            title={i18next.language === 'ar' ? expert.nameAr : expert.nameFr}
+            title={expert.username}
             subtitle={i18next.t('years_of_experience', {
               years: expert.yearsOfExperience,
             })}

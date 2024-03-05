@@ -12,7 +12,7 @@ const SectionHeader = ({title, linkTo}: {title: string; linkTo?: string}) => {
       <StyledText
         text={title}
         color={colors.white}
-        fontWeight="semibold"
+        fontWeight="medium"
         fontSize={16}
       />
       <LinkButton
