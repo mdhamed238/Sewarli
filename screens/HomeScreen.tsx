@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useMemo} from 'react';
+import React, {useCallback, useMemo, useRef} from 'react';
 import StyledText from '../components/StyledText';
 import colors from '../constants/colors';
 import ScreenWrapper from '../components/ScreenWrapper';
@@ -22,10 +22,12 @@ import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {HomeStackList} from '../stacks/HomeStack';
 import i18next from 'i18next';
-import {Expert, Lang, Studio} from '../types';
+import {Expert, AppLanguage, Studio} from '../types';
 import i18n from '../lib/locales/i18n';
 import {experts, studios} from '../lib/dummydata';
 import StudioCard from '../components/StudioCard';
+import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
+import LangBottomSheet from '../components/LangBottomSheet';
 
 const NearExperts = ({data}: {data: Expert[]}) => {
   return (
@@ -244,46 +246,64 @@ const HomeScreen = () => {
     return [expertsNY, mostRecommended];
   }, []);
 
+  const bottomSheetRef = useRef<BottomSheet>(null);
+
+  const handleClosePress = useCallback(
+    () => bottomSheetRef.current?.close(),
+    [],
+  );
+  const handleOpenPress = useCallback(
+    () => bottomSheetRef.current?.expand(),
+    [],
+  );
+
   return (
-    <ScreenWrapper>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.fixedTopRightContainer}>
-          <FAIcon name="bell" size={24} color={colors.white} />
-          <ProfileAvatar />
-        </View>
-        <TouchableOpacity
-          style={styles.fixedTopLeftContainer}
-          onPress={() => navigation.navigate('Language')}>
-          <CountryIcon country={i18next.language as Lang} />
-        </TouchableOpacity>
-        <StyledText
-          fontWeight="bold"
-          text={t('hello_user', {name: 'Mohamed'})}
-          color={colors.white}
-          fontSize={24}
-          style={{
-            marginTop: 10,
-          }}
-        />
-        <NearExperts data={expertsNearYou} />
-        <MostRecommendedExperts data={mostRecommendedExperts} />
-        <Banner />
-        <OurStudios data={studios} />
-        <TopExperts />
-        <GalleriePhoto
-          photos={[
-            require('../assets/images/gallerie1.jpg'),
-            require('../assets/images/gallerie2.jpg'),
-            require('../assets/images/gallerie3.jpg'),
-            require('../assets/images/gallerie4.jpg'),
-            require('../assets/images/gallerie5.jpg'),
-            require('../assets/images/gallerie6.jpg'),
-          ]}
-        />
-        <View style={{height: 80}} />
-      </ScrollView>
-      <StickyButton text={t('add_event')} onPress={() => {}} />
-    </ScreenWrapper>
+    <>
+      <ScreenWrapper>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.fixedTopRightContainer}>
+            <FAIcon name="bell" size={24} color={colors.white} />
+            <ProfileAvatar />
+          </View>
+          <TouchableOpacity
+            style={styles.fixedTopLeftContainer}
+            onPress={handleOpenPress}>
+            <CountryIcon country={i18next.language as AppLanguage} />
+          </TouchableOpacity>
+          <StyledText
+            fontWeight="bold"
+            text={t('hello_user', {name: 'Mohamed'})}
+            color={colors.white}
+            fontSize={24}
+            style={{
+              marginTop: 10,
+            }}
+          />
+          <NearExperts data={expertsNearYou} />
+          <MostRecommendedExperts data={mostRecommendedExperts} />
+          <Banner />
+          <OurStudios data={studios} />
+          <TopExperts />
+          <GalleriePhoto
+            photos={[
+              require('../assets/images/gallerie1.jpg'),
+              require('../assets/images/gallerie2.jpg'),
+              require('../assets/images/gallerie3.jpg'),
+              require('../assets/images/gallerie4.jpg'),
+              require('../assets/images/gallerie5.jpg'),
+              require('../assets/images/gallerie6.jpg'),
+            ]}
+          />
+          <View style={{height: 80}} />
+        </ScrollView>
+        <StickyButton text={t('add_event')} onPress={() => {}} />
+      </ScreenWrapper>
+      <LangBottomSheet
+        bottomSheetRef={bottomSheetRef}
+        handleClosePress={handleClosePress}
+        handleOpenPress={handleOpenPress}
+      />
+    </>
   );
 };
 

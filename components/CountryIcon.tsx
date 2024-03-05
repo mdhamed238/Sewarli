@@ -1,14 +1,14 @@
 import {StyleProp, StyleSheet, ViewStyle} from 'react-native';
 import React from 'react';
 import CountryFlag from 'react-native-country-flag';
-import {Lang} from '../types';
+import {AppLanguage} from '../types';
 
 const CountryIcon = ({
   country,
   style = {},
   shape = 'round',
 }: {
-  country: Lang;
+  country: AppLanguage;
   style?: StyleProp<ViewStyle>;
   shape?: 'round' | 'square';
 }) => {

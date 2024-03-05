@@ -1,4 +1,4 @@
-export type Lang = 'en' | 'fr' | 'ar';
+export type AppLanguage = 'en' | 'fr' | 'ar';
 
 type City =
   | 'Nouakchott'
@@ -28,4 +28,18 @@ export type Studio = {
   city: string;
   rating: number;
   image: any;
+};
+
+export type SelectOption = {
+  label: string;
+  value: string;
+};
+export type CheckedSelectOption = SelectOption & {isChecked: boolean};
+
+export type FilterState = {
+  all: boolean;
+  domains?: string[];
+  cities?: string[];
+  experiences?: string[];
+  ratings?: string[];
 };

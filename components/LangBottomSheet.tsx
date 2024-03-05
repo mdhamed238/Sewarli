@@ -1,12 +1,14 @@
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import React, {useCallback} from 'react';
-import StyledText from '../components/StyledText';
-import colors from '../constants/colors';
-import CountryIcon from '../components/CountryIcon';
-import {AppLanguage} from '../types';
-import i18n from '../lib/locales/i18n';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import React, {useCallback, useMemo} from 'react';
+import BottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
+import StyledText from './StyledText';
 import {useTranslation} from 'react-i18next';
-import {useNavigation} from '@react-navigation/native';
+
+import i18n from '../lib/locales/i18n';
+import {AppLanguage} from '../types';
+import colors from '../constants/colors';
+import CountryIcon from './CountryIcon';
+import {BottomSheetMethods} from '@gorhom/bottom-sheet/lib/typescript/types';
 
 const langs = [
   {
@@ -22,18 +24,45 @@ const langs = [
     label: 'arabic',
   },
 ];
-const LanguageScreen = () => {
+
+const LangBottomSheet = ({
+  bottomSheetRef,
+
+  handleClosePress,
+}: {
+  bottomSheetRef: React.RefObject<BottomSheetMethods>;
+  handleOpenPress: () => void;
+  handleClosePress: () => void;
+}) => {
   const {t} = useTranslation();
-  const navigation = useNavigation();
+  const snapPoints = useMemo(() => ['50%'], []);
+
+  const renderBackdrop = useCallback(
+    (props: any) => (
+      <BottomSheetBackdrop
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+        {...props}
+      />
+    ),
+    [],
+  );
+
   const handleChooseLang = useCallback(
     (lang: AppLanguage) => {
       i18n.setLanguage(lang, lang === 'ar');
+      handleClosePress();
     },
-    [navigation],
+    [handleClosePress],
   );
 
   return (
-    <View style={styles.screen}>
+    <BottomSheet
+      ref={bottomSheetRef}
+      index={-1}
+      snapPoints={snapPoints}
+      enablePanDownToClose
+      backdropComponent={renderBackdrop}>
       <StyledText
         text={t('choose_language')}
         fontWeight="bold"
@@ -64,11 +93,9 @@ const LanguageScreen = () => {
           </TouchableOpacity>
         ))}
       </View>
-    </View>
+    </BottomSheet>
   );
 };
-
-export default LanguageScreen;
 
 const styles = StyleSheet.create({
   screen: {
@@ -92,3 +119,4 @@ const styles = StyleSheet.create({
     gap: 20,
   },
 });
+export default LangBottomSheet;

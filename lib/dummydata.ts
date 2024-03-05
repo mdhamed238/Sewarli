@@ -1,4 +1,4 @@
-import {Expert, Studio} from '../types';
+import {Expert, SelectOption, Studio} from '../types';
 
 export const studios: Studio[] = [
   {
@@ -240,5 +240,93 @@ export const experts: Expert[] = [
     city: 'Nouakchott',
     rating: 4.0,
     image: require('../assets/images/video_editing/3.jpg'),
+  },
+];
+
+export const domainsOptions: SelectOption[] = [
+  {
+    label: 'photography',
+    value: 'photography',
+  },
+  {
+    label: 'videography',
+    value: 'videography',
+  },
+  {
+    label: 'video_editing',
+    value: 'video_editing',
+  },
+  {
+    label: 'graphic_design',
+    value: 'graphic_design',
+  },
+];
+
+export const citiesOptions: SelectOption[] = [
+  {
+    label: 'nouakchott',
+    value: 'nouakchott',
+  },
+  {
+    label: 'nouadhibou',
+    value: 'nouadhibou',
+  },
+  {
+    label: 'kaédi',
+    value: 'kaédi',
+  },
+  {
+    label: 'rosso',
+    value: 'rosso',
+  },
+  {
+    label: 'atar',
+    value: 'atar',
+  },
+  {
+    label: 'zouérat',
+    value: 'zouérat',
+  },
+  {
+    label: 'néma',
+    value: 'néma',
+  },
+  {
+    label: 'aleg',
+    value: 'aleg',
+  },
+  {
+    label: 'akjoujt',
+    value: 'akjoujt',
+  },
+  {
+    label: 'kiffa',
+    value: 'kiffa',
+  },
+];
+
+export const yearsOfExperienceOptions: SelectOption[] = [
+  {
+    label: 'more_than_five_years',
+    value: 'more_than_five_years',
+  },
+  {
+    label: 'more_than_ten_years',
+    value: 'more_than_ten_years',
+  },
+  {
+    label: 'less_than_five_years',
+    value: 'less_than_five_years',
+  },
+];
+
+export const ratingOptions: SelectOption[] = [
+  {
+    label: 'from_3_of_5',
+    value: 'from_3_of_5',
+  },
+  {
+    label: 'from_4.7_of_5',
+    value: 'from_4.7_of_5',
   },
 ];
