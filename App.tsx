@@ -12,35 +12,30 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 const Stack = createNativeStackNavigator();
 const AppNavigation = () => {
   return (
-    <GestureHandlerRootView
-      style={{
-        flex: 1,
-      }}>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}>
-          {true ? (
-            <Stack.Screen
-              name="MainStack"
-              component={MainStack}
-              options={{
-                animation: 'slide_from_right',
-              }}
-            />
-          ) : (
-            <Stack.Screen
-              name="AuthStack"
-              component={AuthStack}
-              options={{
-                animation: 'slide_from_right',
-              }}
-            />
-          )}
-        </Stack.Navigator>
-      </NavigationContainer>
-    </GestureHandlerRootView>
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}>
+        {true ? (
+          <Stack.Screen
+            name="MainStack"
+            component={MainStack}
+            options={{
+              animation: 'slide_from_right',
+            }}
+          />
+        ) : (
+          <Stack.Screen
+            name="AuthStack"
+            component={AuthStack}
+            options={{
+              animation: 'slide_from_right',
+            }}
+          />
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
@@ -55,15 +50,17 @@ export default function App() {
   });
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar />
-      <AppNavigation />
-    </SafeAreaView>
+    <GestureHandlerRootView style={styles.screen}>
+      <SafeAreaView style={styles.screen}>
+        <StatusBar />
+        <AppNavigation />
+      </SafeAreaView>
+    </GestureHandlerRootView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
   },
 });

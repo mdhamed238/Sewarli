@@ -2,7 +2,6 @@ import React from 'react';
 import {Text, StyleSheet, StyleProp, TextStyle} from 'react-native';
 import colors from '../constants/colors';
 import i18n from '../lib/locales/i18n';
-import i18next from 'i18next';
 
 type StyledTextProps = {
   text: string;

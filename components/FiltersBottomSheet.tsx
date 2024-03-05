@@ -15,6 +15,7 @@ import {
   yearsOfExperienceOptions,
 } from '../lib/dummydata';
 import {ScrollView} from 'react-native-gesture-handler';
+import Button from './Button';
 
 const FilterSection = ({
   title,
@@ -29,7 +30,7 @@ const FilterSection = ({
     <View style={styles.filterSectionContainer}>
       <StyledText
         text={title}
-        fontWeight="medium"
+        fontWeight="semibold"
         fontSize={12}
         style={{textAlign: 'left'}}
         color={colors.lightGrey}
@@ -54,10 +55,12 @@ const FiltersBottomSheet = ({
   bottomSheetRef,
   filters,
   setFilters,
+  handleClosePress,
 }: {
   bottomSheetRef: React.RefObject<BottomSheetMethods>;
   filters: FilterState;
   setFilters: React.Dispatch<React.SetStateAction<FilterState>>;
+  handleClosePress: () => void;
 }) => {
   const {t} = useTranslation();
   const snapPoints = useMemo(() => ['90%'], []); //Exact height: 83.375
@@ -175,7 +178,9 @@ const FiltersBottomSheet = ({
       index={-1}
       snapPoints={snapPoints}
       enablePanDownToClose
-      backdropComponent={renderBackdrop}>
+      backdropComponent={renderBackdrop}
+      handleIndicatorStyle={{backgroundColor: colors.lightGrey2}}
+      backgroundStyle={{backgroundColor: colors.darkGrey}}>
       <ScrollView>
         <View style={styles.screen}>
           <StyledText
@@ -183,7 +188,7 @@ const FiltersBottomSheet = ({
             fontWeight="bold"
             fontSize={14}
             style={{textAlign: 'left'}}
-            color={colors.darkGrey}
+            color={colors.white}
           />
           <FilterSection
             title={t('domains')}
@@ -205,6 +210,28 @@ const FiltersBottomSheet = ({
             options={newRatingOptions}
             handleSelect={handleSelectRating}
           />
+          <View
+            style={{
+              width: '100%',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <Button
+              text={t('reset')}
+              onPress={() => setFilters({all: true})}
+              variant="outline"
+              style={{
+                flex: 1,
+              }}
+            />
+            <Button
+              text={t('confirm')}
+              onPress={handleClosePress}
+              style={{
+                flex: 1,
+              }}
+            />
+          </View>
         </View>
       </ScrollView>
     </BottomSheet>
@@ -229,6 +256,5 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 10,
     paddingVertical: 20,
-    backgroundColor: colors.darkGrey,
   },
 });

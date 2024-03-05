@@ -130,6 +130,7 @@ const OurExpertsScreen = () => {
         bottomSheetRef={bottomSheetRef}
         filters={filters}
         setFilters={setFilters}
+        handleClosePress={handleClosePress}
       />
     </>
   );
