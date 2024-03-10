@@ -67,5 +67,21 @@
   "more_than_ten_years": "More than 10 years",
   "less_than_five_years": "Less than 5 years",
   "from_3_of_5": "From 3 of 5",
-  "from_4.7_of_5": "From 4.7 of 5"
+  "from_4.7_of_5": "From 4.7 of 5",
+  "all": "All",
+  "equipments": "Equipments",
+  "camera": "Camera",
+  "lens": "Lens",
+  "lighting": "Lighting",
+  "sound": "Sound",
+  "studio": "Studio",
+  "audio": "A@udio",
+  "tripod": "Tripod",
+  "microphone": "Microphone",
+  "drone": "Drone",
+  "gimbal": "Gimbal",
+  "stabilizer": "Stabilizer",
+  "green_screen": "Green screen",
+  "backdrops": "Backdrops",
+  "costumes": "Costumes"
 }

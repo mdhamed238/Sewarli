@@ -62,7 +62,9 @@ const LangBottomSheet = ({
       index={-1}
       snapPoints={snapPoints}
       enablePanDownToClose
-      backdropComponent={renderBackdrop}>
+      backdropComponent={renderBackdrop}
+      backgroundStyle={{backgroundColor: colors.white}}
+      style={{paddingHorizontal: 16}}>
       <StyledText
         text={t('choose_language')}
         fontWeight="bold"

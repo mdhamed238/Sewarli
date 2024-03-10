@@ -1,57 +1,22 @@
 import {View, StyleSheet} from 'react-native';
 import React, {useCallback, useMemo} from 'react';
 import BottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
-import StyledText from './StyledText';
+import StyledText from '../../../components/StyledText';
 import {useTranslation} from 'react-i18next';
-import colors from '../constants/colors';
+import colors from '../../../constants/colors';
 import {BottomSheetMethods} from '@gorhom/bottom-sheet/lib/typescript/types';
-import FilterSelect from './FilterSelect';
-import {FilterState, CheckedSelectOption} from '../types';
-import i18next from 'i18next';
+import {FilterState} from '../../../types';
 import {
   citiesOptions,
   domainsOptions,
   ratingOptions,
   yearsOfExperienceOptions,
-} from '../lib/dummydata';
+} from '../../../lib/dummydata';
 import {ScrollView} from 'react-native-gesture-handler';
-import Button from './Button';
+import Button from '../../../components/Button';
+import FilterSection from './FilterSection';
 
-const FilterSection = ({
-  title,
-  options,
-  handleSelect,
-}: {
-  title: string;
-  options: Array<CheckedSelectOption>;
-  handleSelect: (value: string) => void;
-}) => {
-  return (
-    <View style={styles.filterSectionContainer}>
-      <StyledText
-        text={title}
-        fontWeight="semibold"
-        fontSize={12}
-        style={{textAlign: 'left'}}
-        color={colors.lightGrey}
-      />
-      <View style={styles.filterSectionItems}>
-        {options.map((option, index) => (
-          <FilterSelect
-            key={index}
-            text={i18next.t(option.label)}
-            checked={option.isChecked}
-            onPress={() => handleSelect(option.value)}
-            borderColor={colors.white}
-            noArrowDown
-          />
-        ))}
-      </View>
-    </View>
-  );
-};
-
-const FiltersBottomSheet = ({
+const ExpertsFiltersBottomSheet = ({
   bottomSheetRef,
   filters,
   setFilters,
@@ -112,62 +77,21 @@ const FiltersBottomSheet = ({
     });
   }, [filters]);
 
-  const handleSelectDomain = (value: string) => {
-    const domains = filters.domains;
-    if (domains?.includes(value)) {
+  const handleSelect = (propery: keyof FilterState, value: string) => {
+    let property = filters[propery] as string[];
+    if (property?.includes(value)) {
+      property = property.filter(el => el !== value);
       setFilters(prev => ({
         ...prev,
-        domains: domains.filter(domain => domain !== value),
+        all: property.length === 0,
+        [propery]: property,
       }));
     } else {
+      property = [...(property || []), value];
       setFilters(prev => ({
         ...prev,
-        domains: [...(prev.domains || []), value],
-      }));
-    }
-  };
-
-  const handleSelectCity = (value: string) => {
-    const cities = filters.cities;
-    if (cities?.includes(value)) {
-      setFilters(prev => ({
-        ...prev,
-        cities: cities.filter(domain => domain !== value),
-      }));
-    } else {
-      setFilters(prev => ({
-        ...prev,
-        cities: [...(prev.cities || []), value],
-      }));
-    }
-  };
-
-  const handleSelectExperience = (value: string) => {
-    const experiences = filters.experiences;
-    if (experiences?.includes(value)) {
-      setFilters(prev => ({
-        ...prev,
-        experiences: experiences.filter(domain => domain !== value),
-      }));
-    } else {
-      setFilters(prev => ({
-        ...prev,
-        experiences: [...(prev.experiences || []), value],
-      }));
-    }
-  };
-
-  const handleSelectRating = (value: string) => {
-    const ratings = filters.ratings;
-    if (ratings?.includes(value)) {
-      setFilters(prev => ({
-        ...prev,
-        ratings: ratings.filter(domain => domain !== value),
-      }));
-    } else {
-      setFilters(prev => ({
-        ...prev,
-        ratings: [...(prev.ratings || []), value],
+        all: false,
+        [propery]: property,
       }));
     }
   };
@@ -193,22 +117,22 @@ const FiltersBottomSheet = ({
           <FilterSection
             title={t('domains')}
             options={newDomainOptions}
-            handleSelect={handleSelectDomain}
+            handleSelect={(value: string) => handleSelect('domains', value)}
           />
           <FilterSection
             title={t('cities')}
             options={newCitiesOptions}
-            handleSelect={handleSelectCity}
+            handleSelect={(value: string) => handleSelect('cities', value)}
           />
           <FilterSection
             title={t('years_of_experience')}
             options={newExperienceOptions}
-            handleSelect={handleSelectExperience}
+            handleSelect={(value: string) => handleSelect('experiences', value)}
           />
           <FilterSection
             title={t('ratings')}
             options={newRatingOptions}
-            handleSelect={handleSelectRating}
+            handleSelect={(value: string) => handleSelect('ratings', value)}
           />
           <View
             style={{
@@ -238,20 +162,9 @@ const FiltersBottomSheet = ({
   );
 };
 
-export default FiltersBottomSheet;
+export default ExpertsFiltersBottomSheet;
 
 const styles = StyleSheet.create({
-  filterSectionItems: {
-    flexDirection: 'row',
-    gap: 10,
-    flexWrap: 'wrap',
-    alignItems: 'flex-start',
-  },
-  filterSectionContainer: {
-    marginVertical: 15,
-    alignItems: 'flex-start',
-    gap: 10,
-  },
   screen: {
     flex: 1,
     paddingHorizontal: 10,

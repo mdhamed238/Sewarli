@@ -68,5 +68,21 @@
   "more_than_ten_years": "Plus de 10 ans",
   "less_than_five_years": "Moins de 5 ans",
   "from_3_of_5": "À partir de 3 sur 5",
-  "from_4.7_of_5": "À partir de 4,7 sur 5"
+  "from_4.7_of_5": "À partir de 4,7 sur 5",
+  "all": "Tout",
+  "equipments": "Équipements",
+  "camera": "Appareil photo",
+  "lens": "Objectif",
+  "lighting": "Éclairage",
+  "sound": "Son",
+  "studio": "Studio",
+  "audio": "Audio",
+  "tripod": "Trépied",
+  "microphone": "Microphone",
+  "drone": "Drone",
+  "gimbal": "Cardan",
+  "stabilizer": "Stabilisateur",
+  "green_screen": "Écran vert",
+  "backdrops": "Fonds",
+  "costumes": "Costumes"
 }

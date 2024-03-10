@@ -68,5 +68,21 @@
   "more_than_ten_years": "أكثر من 10 سنوات",
   "less_than_five_years": "أقل من 5 سنوات",
   "from_3_of_5": "من 3 من 5",
-  "from_4.7_of_5": "من 4.7 من 5"
+  "from_4.7_of_5": "من 4.7 من 5",
+  "all": "الكل",
+  "equipments": "المعدات",
+  "camera": "كاميرا",
+  "lens": "عدسة",
+  "lighting": "إضاءة",
+  "sound": "صوت",
+  "studio": "استوديو",
+  "audio": "صوتيات",
+  "tripod": "ثلاثي القوائم",
+  "microphone": "ميكروفون",
+  "drone": "طائرة بدون طيار",
+  "gimbal": "جمبال",
+  "stabilizer": "مثبت",
+  "green_screen": "شاشة خضراء",
+  "backdrops": "خلفيات",
+  "costumes": "أزياء"
 }

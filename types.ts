@@ -39,7 +39,10 @@ export type CheckedSelectOption = SelectOption & {isChecked: boolean};
 export type FilterState = {
   all: boolean;
   domains?: string[];
+  equipments?: string[];
   cities?: string[];
   experiences?: string[];
   ratings?: string[];
 };
+
+export type FilterStateItem = FilterState[keyof FilterState];

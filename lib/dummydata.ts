@@ -262,6 +262,53 @@ export const domainsOptions: SelectOption[] = [
   },
 ];
 
+export const equipmentOptions: SelectOption[] = [
+  {
+    label: 'camera',
+    value: 'camera',
+  },
+  {
+    label: 'lens',
+    value: 'lens',
+  },
+  {
+    label: 'lighting',
+    value: 'lighting',
+  },
+  {
+    label: 'audio',
+    value: 'audio',
+  },
+  {
+    label: 'tripod',
+    value: 'tripod',
+  },
+  {
+    label: 'drone',
+    value: 'drone',
+  },
+  {
+    label: 'gimbal',
+    value: 'gimbal',
+  },
+  {
+    label: 'stabilizer',
+    value: 'stabilizer',
+  },
+  {
+    label: 'green_screen',
+    value: 'green_screen',
+  },
+  {
+    label: 'backdrops',
+    value: 'backdrops',
+  },
+  {
+    label: 'costumes',
+    value: 'costumes',
+  },
+];
+
 export const citiesOptions: SelectOption[] = [
   {
     label: 'nouakchott',

@@ -10,7 +10,7 @@ import ScreenWrapper from '../../components/ScreenWrapper';
 import StickyButton from '../../components/StickyButton';
 import {useTranslation} from 'react-i18next';
 import FilterSelect from '../../components/FilterSelect';
-import FiltersBottomSheet from '../../components/FiltersBottomSheet';
+import ExpertsFiltersBottomSheet from './_components/ExpertsFiltersBottomSheet';
 import {BottomSheetMethods} from '@gorhom/bottom-sheet/lib/typescript/types';
 
 const Experts = ({data, title}: {data: Expert[]; title: string}) => {
@@ -93,7 +93,7 @@ const OurExpertsScreen = () => {
           }}>
           <FilterSelect
             checked={!!filters.all}
-            text={t('domains')}
+            text={t('all')}
             onPress={handleOpenPress}
           />
           <FilterSelect
@@ -126,7 +126,7 @@ const OurExpertsScreen = () => {
         </ScrollView>
         <StickyButton text={t('add_event')} onPress={() => {}} />
       </ScreenWrapper>
-      <FiltersBottomSheet
+      <ExpertsFiltersBottomSheet
         bottomSheetRef={bottomSheetRef}
         filters={filters}
         setFilters={setFilters}
