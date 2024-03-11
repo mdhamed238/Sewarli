@@ -90,5 +90,7 @@
   "onhold": "في الانتظار",
   "old": "قديمة",
   "old_events": "الفعاليات القديمة",
-  "n_quotes": "{{count}} عرض"
+  "n_quotes": "{{count}} عرض",
+  "chat_feedback_message": "شكرًا لك على الانتظار، سيجيبك أحد أعضاء فريقنا",
+  "formatted_date": "{{day}} {{month}}, {{weekDay}} الساعة {{hour}}:{{minute}}" // Example: 25 Fev, Vend à 10:30
 }

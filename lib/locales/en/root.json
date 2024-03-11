@@ -89,5 +89,7 @@
   "onhold": "On hold",
   "old": "Old",
   "old_events": "Old events",
-  "n_quotes": "{{count}} Quotes"
+  "n_quotes": "{{count}} Quotes",
+  "chat_feedback_message": "Thank you for your patience, a member of our team will answer you",
+  "formatted_date": "{{day}} {{month}}, {{weekDay}} at {{hour}}:{{minute}}" // Example: 25 Fev, Vend à 10:30
 }

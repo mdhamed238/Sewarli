@@ -90,5 +90,7 @@
   "onhold": "En attente",
   "old": "Anciens",
   "old_events": "Anciens événements",
-  "n_quotes": "{{count}} Devis"
+  "n_quotes": "{{count}} Devis",
+  "chat_feedback_message": "Merci de votre patience, un membre de notre equipe vous repondra",
+  "formatted_date": "{{day}} {{month}}, {{weekDay}} à {{hour}}:{{minute}}" // Example: 25 Fev, Vend à 10:30
 }
