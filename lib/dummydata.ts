@@ -1,4 +1,4 @@
-import {Expert, SelectOption, Studio} from '../types';
+import {Event, Expert, SelectOption, Studio} from '../types';
 
 export const studios: Studio[] = [
   {
@@ -375,5 +375,50 @@ export const ratingOptions: SelectOption[] = [
   {
     label: 'from_4.7_of_5',
     value: 'from_4.7_of_5',
+  },
+];
+
+export const events: Event[] = [
+  {
+    title: 'Mariage (Le Grand Jour!)',
+    date: '16/03/2024',
+    status: 'received',
+    quoteCount: 3,
+  },
+  {
+    title: 'Cérémonie de Graduation',
+    date: '26/02/2024',
+    status: 'received',
+    quoteCount: 0,
+  },
+  {
+    title: 'Anniversaire Surprise de Laura',
+    date: '05/04/2024',
+    status: 'onhold',
+    quoteCount: 0,
+  },
+  {
+    title: 'Réunion Annuelle des Anciens Élèves',
+    date: '23/05/2024',
+    status: 'onhold',
+    quoteCount: 0,
+  },
+  {
+    title: 'Lancement du Produit AlphaTech',
+    date: '17/06/2024',
+    status: 'onhold',
+    quoteCount: 0,
+  },
+  {
+    title: 'Gala de Charité 2023',
+    date: '11/12/2023',
+    status: 'old',
+    quoteCount: 0,
+  },
+  {
+    title: "Séminaire d'Entreprise Innovations 2024",
+    date: '08/02/2024',
+    status: 'old',
+    quoteCount: 0,
   },
 ];

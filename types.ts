@@ -46,3 +46,10 @@ export type FilterState = {
 };
 
 export type FilterStateItem = FilterState[keyof FilterState];
+
+export type Event = {
+  title: string;
+  date: string;
+  status: 'received' | 'onhold' | 'old';
+  quoteCount: number;
+};

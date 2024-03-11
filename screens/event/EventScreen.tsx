@@ -1,13 +1,14 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import ScreenWrapper from '../../components/ScreenWrapper';
 import StyledText from '../../components/StyledText';
 import {useTranslation} from 'react-i18next';
 import colors from '../../constants/colors';
-import OurExpertsScreen from './OurExpertsScreen';
-import OurStudiosScreen from './OurStudiosScreen';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import ReceivedEventScreen from './_screens/ReceivedEventScreen';
 import i18next from 'i18next';
+import InprogressEventScreen from './_screens/InprogressEventScreen';
+import OldEventScreen from './_screens/OldEventScreen';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -33,31 +34,38 @@ const Tabs = () => {
         swipeEnabled: false,
       }}>
       <Tab.Screen
-        name="OurExperts"
-        component={OurExpertsScreen}
+        name="Received"
+        component={ReceivedEventScreen}
         options={{
-          title: i18next.t('our_experts'),
+          title: i18next.t('received_quote'),
         }}
       />
       <Tab.Screen
-        name="OurStudios"
-        component={OurStudiosScreen}
+        name="onhold"
+        component={InprogressEventScreen}
         options={{
-          title: i18next.t('our_studios'),
+          title: i18next.t('inprogress'),
+        }}
+      />
+      <Tab.Screen
+        name="OldEvents"
+        component={OldEventScreen}
+        options={{
+          title: i18next.t('old'),
         }}
       />
     </Tab.Navigator>
   );
 };
 
-const ExploreScreen = () => {
+const EventScreen = () => {
   const {t} = useTranslation();
   return (
     <ScreenWrapper withHeader noHorizontalPadding>
       <View style={styles.topContainer}>
         <StyledText
           fontWeight="bold"
-          text={t('explore') + ' 🪄'}
+          text={t('events') + ' 🗓️'}
           color={colors.white}
           fontSize={24}
         />
@@ -67,17 +75,10 @@ const ExploreScreen = () => {
   );
 };
 
-export default ExploreScreen;
-
 const styles = StyleSheet.create({
   topContainer: {
     paddingHorizontal: 16,
   },
-  // fixedTopRightContainer: {
-  //   flexDirection: 'row',
-  //   justifyContent: 'flex-end',
-  //   alignItems: 'center',
-  //   gap: 20,
-  //   marginBottom: 8,
-  // },
 });
+
+export default EventScreen;

@@ -6,9 +6,25 @@ import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 import colors from '../constants/colors';
 import i18next from 'i18next';
 
-const SectionHeader = ({title, linkTo}: {title: string; linkTo?: string}) => {
+const SectionHeader = ({
+  title,
+  linkTo,
+  noMargin = false,
+}: {
+  title: string;
+  linkTo?: string;
+  noMargin?: boolean;
+}) => {
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        !noMargin
+          ? {
+              marginTop: 40,
+            }
+          : {},
+      ]}>
       <StyledText
         text={title}
         color={colors.white}
@@ -36,7 +52,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     maxWidth: 300,
-    marginTop: 40,
   },
 });
 export default SectionHeader;

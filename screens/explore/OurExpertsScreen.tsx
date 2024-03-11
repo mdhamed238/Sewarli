@@ -12,11 +12,15 @@ import {useTranslation} from 'react-i18next';
 import FilterSelect from '../../components/FilterSelect';
 import ExpertsFiltersBottomSheet from './_components/ExpertsFiltersBottomSheet';
 import {BottomSheetMethods} from '@gorhom/bottom-sheet/lib/typescript/types';
+import colors from '../../constants/colors';
 
 const Experts = ({data, title}: {data: Expert[]; title: string}) => {
   return (
-    <>
-      <SectionHeader title={title} />
+    <View
+      style={{
+        marginTop: 16,
+      }}>
+      <SectionHeader title={title} noMargin />
       <ScrollView
         horizontal
         contentContainerStyle={{
@@ -40,7 +44,7 @@ const Experts = ({data, title}: {data: Expert[]; title: string}) => {
           />
         ))}
       </ScrollView>
-    </>
+    </View>
   );
 };
 
@@ -87,10 +91,11 @@ const OurExpertsScreen = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
-            height: 60,
+            height: 50,
             alignItems: 'flex-start',
             gap: 10,
-          }}>
+          }}
+          nestedScrollEnabled={false}>
           <FilterSelect
             checked={!!filters.all}
             text={t('all')}
@@ -117,7 +122,11 @@ const OurExpertsScreen = () => {
             onPress={handleOpenPress}
           />
         </ScrollView>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{
+            gap: 20,
+          }}>
           <Experts title={t('our_monteurs')} data={videoEditors} />
           <Experts title={t('our_photographers')} data={photographers} />
           <Experts title={t('our_gfxdesigners')} data={graphicDesigners} />

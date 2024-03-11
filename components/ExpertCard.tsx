@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     width: 242,
     minHeight: 235,
-    maxHeight: 270,
+    maxHeight: 280,
   },
   bottomContainer: {
     alignItems: 'flex-start',

@@ -235,7 +235,6 @@ const Banner = () => {
 
 const HomeScreen = () => {
   const {t} = useTranslation();
-  const navigation = useNavigation<HomeScreenProp>();
   const [expertsNearYou, mostRecommendedExperts] = useMemo(() => {
     const rand = Math.floor(Math.random() * 9);
     const expertsNY = experts.slice(rand, rand + 3);
@@ -246,38 +245,15 @@ const HomeScreen = () => {
     return [expertsNY, mostRecommended];
   }, []);
 
-  const bottomSheetRef = useRef<BottomSheet>(null);
-
-  const handleClosePress = useCallback(
-    () => bottomSheetRef.current?.close(),
-    [],
-  );
-  const handleOpenPress = useCallback(
-    () => bottomSheetRef.current?.expand(),
-    [],
-  );
-
   return (
     <>
-      <ScreenWrapper>
+      <ScreenWrapper withHeader>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.fixedTopRightContainer}>
-            <FAIcon name="bell" size={24} color={colors.white} />
-            <ProfileAvatar />
-          </View>
-          <TouchableOpacity
-            style={styles.fixedTopLeftContainer}
-            onPress={handleOpenPress}>
-            <CountryIcon country={i18next.language as AppLanguage} />
-          </TouchableOpacity>
           <StyledText
             fontWeight="bold"
             text={t('hello_user', {name: 'Mohamed'})}
             color={colors.white}
             fontSize={24}
-            style={{
-              marginTop: 10,
-            }}
           />
           <NearExperts data={expertsNearYou} />
           <MostRecommendedExperts data={mostRecommendedExperts} />
@@ -298,16 +274,11 @@ const HomeScreen = () => {
         </ScrollView>
         <StickyButton text={t('add_event')} onPress={() => {}} />
       </ScreenWrapper>
-      <LangBottomSheet
-        bottomSheetRef={bottomSheetRef}
-        handleClosePress={handleClosePress}
-        handleOpenPress={handleOpenPress}
-      />
     </>
   );
 };
 
-type HomeScreenProp = NativeStackNavigationProp<HomeStackList, 'Home'>;
+// type HomeScreenProp = NativeStackNavigationProp<HomeStackList, 'Home'>;
 
 export default HomeScreen;
 
@@ -358,17 +329,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     marginTop: 'auto',
-  },
-  fixedTopRightContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    gap: 20,
-    marginBottom: 8,
-  },
-  fixedTopLeftContainer: {
-    position: 'absolute',
-    top: 5,
   },
   image: {
     width: '100%',

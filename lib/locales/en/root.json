@@ -83,5 +83,11 @@
   "stabilizer": "Stabilizer",
   "green_screen": "Green screen",
   "backdrops": "Backdrops",
-  "costumes": "Costumes"
+  "costumes": "Costumes",
+  "received_quote": "Received",
+  "inprogress": "In progress",
+  "onhold": "On hold",
+  "old": "Old",
+  "old_events": "Old events",
+  "n_quotes": "{{count}} Quotes"
 }

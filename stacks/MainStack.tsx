@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import EventScreen from '../screens/EventScreen';
+import EventScreen from '../screens/event/EventScreen';
 import ExploreScreen from '../screens/explore/ExploreScreen';
 import AssistanceScreen from '../screens/AssistanceScreen';
 import colors from '../constants/colors';

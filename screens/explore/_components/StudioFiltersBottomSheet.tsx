@@ -115,7 +115,7 @@ const StudioFiltersBottomSheet = ({
             color={colors.white}
           />
           <FilterSection
-            title={t('equiments')}
+            title={t('equipments')}
             options={newEquipmentOptions}
             handleSelect={(value: string) => handleSelect('equipments', value)}
           />

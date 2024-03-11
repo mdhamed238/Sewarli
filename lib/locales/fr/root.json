@@ -84,5 +84,11 @@
   "stabilizer": "Stabilisateur",
   "green_screen": "Écran vert",
   "backdrops": "Fonds",
-  "costumes": "Costumes"
+  "costumes": "Costumes",
+  "received_quote": "Devis reçu",
+  "inprogress": "En cours",
+  "onhold": "En attente",
+  "old": "Anciens",
+  "old_events": "Anciens événements",
+  "n_quotes": "{{count}} Devis"
 }

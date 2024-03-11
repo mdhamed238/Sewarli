@@ -1,11 +1,12 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import ScreenWrapper from '../components/ScreenWrapper';
 
 const AssistanceScreen = () => {
   return (
-    <View>
-      <Text>AssistanceScreen</Text>
-    </View>
+    <ScreenWrapper withHeader>
+      <View style={{}}></View>
+    </ScreenWrapper>
   );
 };
 

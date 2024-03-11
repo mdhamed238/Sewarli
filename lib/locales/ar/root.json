@@ -84,5 +84,11 @@
   "stabilizer": "مثبت",
   "green_screen": "شاشة خضراء",
   "backdrops": "خلفيات",
-  "costumes": "أزياء"
+  "costumes": "أزياء",
+  "received_quote": "تم استلام العرض",
+  "inprogress": "قيد التنفيذ",
+  "onhold": "في الانتظار",
+  "old": "قديمة",
+  "old_events": "الفعاليات القديمة",
+  "n_quotes": "{{count}} عرض"
 }
