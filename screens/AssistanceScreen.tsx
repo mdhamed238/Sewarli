@@ -1,5 +1,5 @@
 import React, {useCallback, useMemo, useRef, useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ScreenWrapper from '../components/ScreenWrapper';
 import {Bubble, GiftedChat, InputToolbar, Send} from 'react-native-gifted-chat';
 import colors from '../constants/colors';
@@ -10,9 +10,12 @@ import {AppLanguage} from '../types';
 import {useTranslation} from 'react-i18next';
 import SendIcon from '../assets/svg/send.svg';
 import AttachIcon from '../assets/svg/attach.svg';
+import CloseIcon from '../assets/svg/close.svg';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 const AssistanceScreen = () => {
   const {t} = useTranslation();
+  const [imageUri, setImageUri] = useState<string | null>(null);
   const [messages, setMessages] = useState([
     {
       _id: 2,
@@ -77,7 +80,7 @@ const AssistanceScreen = () => {
           height: '100%',
           width: 40,
         }}
-        onPress={onAttach}>
+        onPress={() => {}}>
         <AttachIcon width={24} height={24} />
       </TouchableOpacity>
     );
@@ -99,29 +102,66 @@ const AssistanceScreen = () => {
     props => {
       // Add additional props for customization
       return (
-        <InputToolbar
-          {...props}
-          containerStyle={{
-            backgroundColor: colors.black,
-            borderTopWidth: 0,
-            marginTop: 8,
-          }}
-          textInputStyle={{
-            color: colors.white,
-          }}
-          renderSend={renderSend}
-          renderActions={renderActions}
-        />
+        <>
+          {imageUri && (
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: 4,
+                height: 50,
+              }}>
+              <Image
+                source={{uri: imageUri}}
+                style={{width: 60, height: 50, borderRadius: 8}}
+              />
+              <TouchableOpacity onPress={() => setImageUri(null)}>
+                <CloseIcon width={24} height={24} fill={'red'} />
+              </TouchableOpacity>
+            </View>
+          )}
+          <InputToolbar
+            {...props}
+            containerStyle={{
+              backgroundColor: colors.black,
+              borderTopWidth: 0,
+              marginTop: 8,
+            }}
+            textInputStyle={{
+              color: colors.white,
+            }}
+            renderSend={renderSend}
+            renderActions={renderActions}
+          />
+        </>
       );
     },
-    [renderSend, renderActions],
+    [imageUri, renderSend, renderActions],
   );
 
-  const onSend = useCallback((messages: any = []) => {
-    console.log('Messages sent', messages);
-    setMessages(previousMessages =>
-      GiftedChat.append(previousMessages, messages),
-    );
+  const onSend = useCallback(
+    (messages: any = []) => {
+      if (imageUri) {
+        messages[0].image = imageUri;
+        setImageUri(null); // Clear the image preview after sending
+      }
+      setMessages(previousMessages =>
+        GiftedChat.append(previousMessages, messages),
+      );
+    },
+    [imageUri],
+  );
+
+  const handlePickImage = useCallback(async () => {
+    const result = await launchImageLibrary({
+      mediaType: 'photo',
+      quality: 0.7,
+      selectionLimit: 1,
+    });
+    if (!result.didCancel) {
+      setImageUri(result.assets?.[0].uri as string);
+    }
   }, []);
 
   return (
